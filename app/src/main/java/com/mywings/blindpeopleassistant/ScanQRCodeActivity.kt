@@ -1,15 +1,16 @@
 package com.mywings.blindpeopleassistant
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Bundle
-import android.os.Handler
+import android.os.*
 import android.speech.tts.TextToSpeech
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.animation.Animation
+import android.view.animation.Interpolator
 import android.view.animation.LinearInterpolator
 import android.view.animation.TranslateAnimation
 import de.klimek.scanner.OnDecodedCallback
@@ -65,7 +66,7 @@ class ScanQRCodeActivity : AppCompatActivity(), OnDecodedCallback {
         mAnimation.duration = 500
         mAnimation.repeatCount = -1
         mAnimation.repeatMode = Animation.REVERSE
-        mAnimation.interpolator = LinearInterpolator()
+        mAnimation.interpolator = LinearInterpolator() as Interpolator?
         imgLine.animation = mAnimation
     }
 
@@ -87,9 +88,13 @@ class ScanQRCodeActivity : AppCompatActivity(), OnDecodedCallback {
     override fun onDecoded(result: String?) {
 
         if (result!!.isNotEmpty()) {
+            val v = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
+            } else {
+                v.vibrate(500)
+            }
 
-
-            //textToSpeech.setPitch(2f)
             textToSpeech.speak(
                 "Scanned successfully,         Please wait         retrieving     product info",
                 TextToSpeech.QUEUE_FLUSH,

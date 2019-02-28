@@ -1,7 +1,6 @@
 package com.mywings.blindpeopleassistant.process
 
 import android.os.AsyncTask
-import org.json.JSONArray
 import org.json.JSONObject
 
 class GetProductInfo : AsyncTask<String, Void, JSONObject>() {
@@ -12,7 +11,7 @@ class GetProductInfo : AsyncTask<String, Void, JSONObject>() {
 
     override fun doInBackground(vararg params: String?): JSONObject? {
         val response =
-            httpConnectionUtil.requestGet(ConstantsHelper.URL + ConstantsHelper.GET_PRODCUT + "?id=" + params[0])
+            httpConnectionUtil.requestGet(ConstantsHelper.URL + ConstantsHelper.GET_PRODUCT + "?id=" + params[0])
 
         if (response.isNotEmpty()) {
             return JSONObject(response)
