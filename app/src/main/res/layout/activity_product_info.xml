@@ -1,9 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:id="@+id/clContainer"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             tools:context=".ProductInfoActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/clContainer"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".ProductInfoActivity" android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="15dp"
+              android:textColor="@android:color/black" android:id="@+id/lblName"/>
+
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="15dp"
+              android:textColor="@android:color/black" android:id="@+id/lblProductInfo"/>
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="15dp"
+              android:textColor="@android:color/black" android:id="@+id/lblPrice"/>
+
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/lblUnit"
+              android:padding="15dp"
+              android:textColor="@android:color/black"/>
+
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/lblQty"
+              android:padding="15dp"
+              android:textColor="@android:color/black"/>
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="15dp"
+              android:textColor="@android:color/black" android:id="@+id/lblManu"/>
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="15dp"
+              android:textColor="@android:color/black" android:id="@+id/lblEx"/>
+
+
+</LinearLayout>

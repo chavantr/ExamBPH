@@ -36,13 +36,36 @@ class ProductInfoActivity : AppCompatActivity(), OnProductListener {
     override fun onProductSuccess(result: JSONObject) {
         progressDialogUtil.hide()
         if (null != result && result.toString().isNotEmpty()) {
+
             var product = Product()
+
             product.id = result.getInt("Id")
+
             product.measurement = result.getString("Measurement")
+
             product.name = result.getString("Name")
+
             product.productInfo = result.getString("ProductInfo")
+
             product.quantity = result.getString("Qty")
+
             product.price = result.getString("Price")
+
+            lblName.text = "Name : " + product.name
+
+            lblProductInfo.text = "Product Info : " + product.productInfo
+
+            lblQty.text = "Quantity : " + product.quantity
+
+            lblPrice.text = "Price : " + product.price
+
+            lblEx.text = "Expiry date : " + product.expiryDate
+
+            lblManu.text = "Manufacture date : " + product.manufactureDate
+
+
+
+
             generate(product)
         } else {
             textToSpeech.speak(
@@ -82,6 +105,30 @@ class ProductInfoActivity : AppCompatActivity(), OnProductListener {
         delayIn();
         textToSpeech.speak(
             "Tap on screen tap to scan again another product, Thank You",
+            TextToSpeech.QUEUE_ADD,
+            myHash
+        )
+
+        delayIn()
+
+        textToSpeech.speak(
+            "Unit ${product.measurement}",
+            TextToSpeech.QUEUE_ADD,
+            myHash
+        )
+
+        delayIn()
+
+        textToSpeech.speak(
+            "Manufactured date ${product.manufactureDate}",
+            TextToSpeech.QUEUE_ADD,
+            myHash
+        )
+
+        delayIn()
+
+        textToSpeech.speak(
+            "Expiry date ${product.expiryDate}",
             TextToSpeech.QUEUE_ADD,
             myHash
         )
