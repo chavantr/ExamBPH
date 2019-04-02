@@ -33,46 +33,50 @@ class ProductInfoActivity : AppCompatActivity(), OnProductListener {
         getProductInfo.setOnProductListener(this, restult)
     }
 
-    override fun onProductSuccess(result: JSONObject) {
+    override fun onProductSuccess(result: JSONObject?) {
         progressDialogUtil.hide()
-        if (null != result && result.toString().isNotEmpty()) {
+        try {
+            if (null != result && result.toString().isNotEmpty()) {
 
-            var product = Product()
+                var product = Product()
 
-            product.id = result.getInt("Id")
+                product.id = result.getInt("Id")
 
-            product.measurement = result.getString("Measurement")
+                product.measurement = result.getString("Measurement")
 
-            product.name = result.getString("Name")
+                product.name = result.getString("Name")
 
-            product.productInfo = result.getString("ProductInfo")
+                product.productInfo = result.getString("ProductInfo")
 
-            product.quantity = result.getString("Qty")
+                product.quantity = result.getString("Qty")
 
-            product.price = result.getString("Price")
+                product.price = result.getString("Price")
 
-            lblName.text = "Name : " + product.name
+                product.manufactureDate = result.getString("ManufactureDate")
 
-            lblProductInfo.text = "Product Info : " + product.productInfo
+                product.expiryDate = result.getString("ExpireDate")
 
-            lblQty.text = "Quantity : " + product.quantity
+                lblName.text = "Name : " + product.name
 
-            lblPrice.text = "Price : " + product.price
+                lblProductInfo.text = "Product Info : " + product.productInfo
 
-            lblEx.text = "Expiry date : " + product.expiryDate
+                lblQty.text = "Quantity : " + product.quantity
 
-            lblManu.text = "Manufacture date : " + product.manufactureDate
+                lblPrice.text = "Price : " + product.price
 
+                lblEx.text = "Expiry date : " + product.expiryDate
 
+                lblManu.text = "Manufacture date : " + product.manufactureDate
 
-
-            generate(product)
-        } else {
-            textToSpeech.speak(
-                "Product details not found of product",
-                TextToSpeech.QUEUE_FLUSH,
-                null
-            )
+                generate(product)
+            } else {
+                textToSpeech.speak(
+                    "Product details not found of product",
+                    TextToSpeech.QUEUE_FLUSH,
+                    null
+                )
+            }
+        } catch (e: Exception) {
         }
     }
 
@@ -102,12 +106,7 @@ class ProductInfoActivity : AppCompatActivity(), OnProductListener {
             TextToSpeech.QUEUE_ADD,
             myHash
         )
-        delayIn();
-        textToSpeech.speak(
-            "Tap on screen tap to scan again another product, Thank You",
-            TextToSpeech.QUEUE_ADD,
-            myHash
-        )
+
 
         delayIn()
 
@@ -129,6 +128,13 @@ class ProductInfoActivity : AppCompatActivity(), OnProductListener {
 
         textToSpeech.speak(
             "Expiry date ${product.expiryDate}",
+            TextToSpeech.QUEUE_ADD,
+            myHash
+        )
+
+        delayIn();
+        textToSpeech.speak(
+            "Tap on screen tap to scan again another product, Thank You",
             TextToSpeech.QUEUE_ADD,
             myHash
         )

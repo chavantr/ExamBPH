@@ -10,13 +10,15 @@ class GetProductInfo : AsyncTask<String, Void, JSONObject>() {
     private lateinit var onProductListener: OnProductListener
 
     override fun doInBackground(vararg params: String?): JSONObject? {
-        val response =
+        var response =
             httpConnectionUtil.requestGet(ConstantsHelper.URL + ConstantsHelper.GET_PRODUCT + "?id=" + params[0])
-
-        if (response.isNotEmpty()) {
-            return JSONObject(response)
+        try {
+            if (null != response && response.isNotEmpty()) {
+                return JSONObject(response)
+            }
+        } catch (e: NullPointerException) {
+            return null
         }
-
         return null
     }
 
